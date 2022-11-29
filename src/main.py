@@ -1,19 +1,15 @@
 import os
-import PIL
 import cv2
 import zlib
 import base64
 import numpy as np
 import supervisely as sly
 from dotenv import load_dotenv
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-import numpy as np
 
 
 def base64_2_mask(s):
     z = zlib.decompress(base64.b64decode(s))
-    n = np.fromstring(z, np.uint8)
+    n = np.frombuffer(z, np.uint8)
     mask = cv2.imdecode(n, cv2.IMREAD_UNCHANGED)[:, :, 3].astype(bool)
     return mask
 
@@ -93,7 +89,10 @@ for dataset in datasets:
                     bitmap = base64_2_mask(anno["bitmap"]["data"])
                     x0, y0 = anno["bitmap"]["origin"]
                     x1, y1 = x0 + bitmap.shape[1], y0 + bitmap.shape[0]
-                    mask_images[current_class][y0:y1, x0:x1] = bitmap
+                    mask_images[current_class][y0:y1, x0:x1] = np.clip(
+                        mask_images[current_class][y0:y1, x0:x1] + bitmap, 0, 1
+                    )
+
                 else:
                     continue
 
