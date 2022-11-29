@@ -1,11 +1,11 @@
 import os
+import PIL
 import cv2
 import zlib
 import base64
 import numpy as np
 import supervisely as sly
 from dotenv import load_dotenv
-import PIL
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
@@ -61,10 +61,17 @@ datasets = api.dataset.get_list(initial_project.id)
 for dataset in datasets:
     print(f"Dataset {dataset.name} has {dataset.items_count} images")
     images = api.image.get_list(dataset.id)
+
+    new_anns = []
     for batch in sly.batched(images):
-        image_ids = [image.id for image in batch]
+        img_names, image_ids, img_metas = zip(*((x.name, x.id, x.meta) for x in batch))
         annotations = api.annotation.download_json_batch(dataset.id, image_ids)
-        for image, ann_json in zip(batch, annotations):
+        new_img_infos = api.image.upload_ids(
+            sem_seg_dataset.id, img_names, image_ids, metas=img_metas
+        )
+        new_img_ids = [x.id for x in new_img_infos]
+
+        for new_img_id, image, ann_json in zip(new_img_ids, batch, annotations):
             mask_images = {}
             for anno in ann_json["objects"]:
                 current_class = anno["classTitle"]
@@ -85,14 +92,20 @@ for dataset in datasets:
                 elif geometry_type == "bitmap":
                     bitmap = base64_2_mask(anno["bitmap"]["data"])
                     x0, y0 = anno["bitmap"]["origin"]
-                    x1, y1 = x0 + bitmap.shape[0], y0 + bitmap.shape[1]
-                    mask_images[current_class][x0:x1, y0:y1] = bitmap
+                    x1, y1 = x0 + bitmap.shape[1], y0 + bitmap.shape[0]
+                    mask_images[current_class][y0:y1, x0:x1] = bitmap
                 else:
                     continue
 
-            # plt.imsave("temp.png", mask_images[current_class], cmap=cm.gray)
-
+            image_annos = []
             for mask_class, mask_arr in mask_images.items():
                 # supports masks with values (0, 1) or (0, 255) or (False, True)
                 mask = sly.Bitmap(mask_arr)
                 label = sly.Label(geometry=mask, obj_class=objects_dict[mask_class])
+                image_annos.append(label)
+
+            ann = sly.Annotation(
+                img_size=[image.height, image.width], labels=image_annos
+            )
+            new_anns.append(ann)
+        api.annotation.upload_anns(new_img_ids, new_anns)
