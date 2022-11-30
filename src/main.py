@@ -34,9 +34,6 @@ objects_dict = {
     obj_class.name: sly.ObjClass(obj_class.name, sly.Bitmap)
     for obj_class in src_project_meta.obj_classes
 }
-dst_project_meta = src_project_meta.clone(obj_classes=list(objects_dict.values()))
-api.project.update_meta(dst_project.id, dst_project_meta.to_json())
-api.project.update_custom_data(dst_project.id, {"src_project": src_project.id})
 
 datasets = api.dataset.get_list(src_project.id)
 for dataset in datasets:
@@ -83,4 +80,12 @@ for dataset in datasets:
 
             ann = sly.Annotation.clone(image_annotations, labels=new_labels)
             new_anns.append(ann)
+
+        dst_project_meta = src_project_meta.clone(
+            obj_classes=list(
+                filter(lambda x: x.name in mask_images.keys(), objects_dict.values())
+            )
+        )
+        api.project.update_meta(dst_project.id, dst_project_meta.to_json())
+        api.project.update_custom_data(dst_project.id, {"src_project": src_project.id})
         api.annotation.upload_anns(new_img_ids, new_anns)
