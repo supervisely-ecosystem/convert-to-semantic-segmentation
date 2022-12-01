@@ -33,10 +33,17 @@ dst_project = api.project.create(
 objects_dict = {
     obj_class.name: sly.ObjClass(obj_class.name, sly.Bitmap)
     for obj_class in src_project_meta.obj_classes
+    if obj_class.geometry_type in (sly.Bitmap, sly.Polygon)
 }
+dst_project_meta = src_project_meta.clone(obj_classes=list(objects_dict.values()))
+api.project.update_meta(dst_project.id, dst_project_meta.to_json())
+api.project.update_custom_data(dst_project.id, {"src_project": src_project.id})
 
-datasets = api.dataset.get_list(src_project.id)
-for dataset in datasets:
+for dataset in api.dataset.get_list(src_project.id):
+    ds_progress = sly.Progress(
+        f"Processing dataset: {src_project.name}/{dataset.name}",
+        total_cnt=dataset.images_count,
+    )
     print(f"Dataset {dataset.name} has {dataset.items_count} images")
     images = api.image.get_list(dataset.id)
 
@@ -55,12 +62,10 @@ for dataset in datasets:
         new_img_ids = [x.id for x in new_img_infos]
 
         for image, ann_json in zip(batch, annotations):
-            image_annotations = sly.Annotation.from_json(ann_json, src_project_meta)
+            anno = sly.Annotation.from_json(ann_json, src_project_meta)
 
-            mask_images = defaultdict(
-                lambda: np.zeros(image_annotations.img_size, bool)
-            )
-            for index, label in enumerate(image_annotations.labels, start=1):
+            mask_images = defaultdict(lambda: np.zeros(anno.img_size, bool))
+            for index, label in enumerate(anno.labels, start=1):
                 current_class = label.obj_class.name
                 geometry_type = label.obj_class.geometry_type
 
@@ -78,14 +83,8 @@ for dataset in datasets:
                 label = sly.Label(geometry=mask, obj_class=objects_dict[mask_class])
                 new_labels.append(label)
 
-            ann = sly.Annotation.clone(image_annotations, labels=new_labels)
-            new_anns.append(ann)
+            new_anno = anno.clone(labels=new_labels)
+            new_anns.append(new_anno)
 
-        dst_project_meta = src_project_meta.clone(
-            obj_classes=list(
-                filter(lambda x: x.name in mask_images.keys(), objects_dict.values())
-            )
-        )
-        api.project.update_meta(dst_project.id, dst_project_meta.to_json())
-        api.project.update_custom_data(dst_project.id, {"src_project": src_project.id})
+        ds_progress.iters_done_report(len(batch))
         api.annotation.upload_anns(new_img_ids, new_anns)
