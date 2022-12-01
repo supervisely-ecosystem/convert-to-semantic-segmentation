@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 from collections import defaultdict
 
 # init api for communicating with Supervisely Instance
-load_dotenv("local.env")
+if sly.is_development():
+    load_dotenv("local.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
 
 app = sly.Application()
