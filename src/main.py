@@ -7,6 +7,8 @@ from collections import defaultdict
 # init api for communicating with Supervisely Instance
 load_dotenv("local.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
+
+app = sly.Application()
 api = sly.Api.from_env()
 
 # check the workspace exists
@@ -28,13 +30,13 @@ dst_project = api.project.create(
     change_name_if_conflict=True,
 )
 
-
 # export all classes from initial project to new project with bitmap type
 objects_dict = {
     obj_class.name: sly.ObjClass(obj_class.name, sly.Bitmap)
     for obj_class in src_project_meta.obj_classes
-    if obj_class.geometry_type in (sly.Bitmap, sly.Polygon)
+    if obj_class.geometry_type in (sly.Bitmap, sly.Polygon, sly.AnyGeometry)
 }
+
 dst_project_meta = src_project_meta.clone(obj_classes=list(objects_dict.values()))
 api.project.update_meta(dst_project.id, dst_project_meta.to_json())
 api.project.update_custom_data(dst_project.id, {"src_project": src_project.id})
@@ -88,3 +90,5 @@ for dataset in api.dataset.get_list(src_project.id):
 
         ds_progress.iters_done_report(len(batch))
         api.annotation.upload_anns(new_img_ids, new_anns)
+
+app.shutdown()

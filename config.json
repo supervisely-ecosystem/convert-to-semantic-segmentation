@@ -1,0 +1,13 @@
+{
+  "name": "Convert all dataset labels ro semantic segmentation",
+  "type": "app",
+  "categories": [
+    "images",
+    "annotation transformation",
+    "data operations"
+  ],
+  "description": "Convert polygon and bitmap labels to semantic segmentation",
+  "version": "2.0.0",
+  "entrypoint": "python src/main.py",
+  "headless": true
+}
