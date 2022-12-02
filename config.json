@@ -13,5 +13,8 @@
   "context_menu": {
     "context_category": "Transform",
     "target": ["images_project"]
-  }
+  },
+   "icon": "https://user-images.githubusercontent.com/115161827/205339202-e7cbf746-9fa9-4ade-a42c-6eab1143fead.jpg",
+  "icon_cover": true,
+  "poster": "https://user-images.githubusercontent.com/115161827/205339220-4adc3b2a-356b-480b-87d2-ae8e646c8216.png"  
 }
