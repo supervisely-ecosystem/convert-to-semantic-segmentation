@@ -1,5 +1,5 @@
 {
-  "name": "Convert all dataset labels to semantic segmentation",
+  "name": "Convert to semantic segmentation",
   "type": "app",
   "categories": [
     "images",
