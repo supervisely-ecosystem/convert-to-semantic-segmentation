@@ -5,7 +5,8 @@
 
 <p align="center">
   <a href="#Overview">Overview</a> •
-  <a href="#How-to-use">How To Use</a>
+  <a href="#How-to-use">How To Use</a> •
+  <a href="#Result">Result</a>
 </p>
 
 [![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/convert-to-semantic-segmentation)
