@@ -19,8 +19,8 @@
 
 # Overview
 
-App convert all supported labels to one bitmap for each supported class.
-It may be helpful when you change you task from instance to semantic segmentation.
+App converts all supported labels to one bitmap for each supported class.
+It may be helpful when you change your task from instance to semantic segmentation.
 
 Supported classes: `Polygon`, `Bitmap` or `Any Shape` 
 
