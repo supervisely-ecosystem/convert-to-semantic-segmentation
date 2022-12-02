@@ -48,20 +48,20 @@ App can be launched from ecosystem or images project
 
 **Step 1.** Run the application from the context menu of the Images Project
 
-<img src="#action" width="80%" style='padding-top: 10px'>  
+<img src="https://user-images.githubusercontent.com/115161827/205345333-0b0a8c76-e369-406f-9955-46940f44e22a.png" width="80%" style='padding-top: 10px'>  
 
 **Step 2.** Press the Run button
 
-<img src="#action" width="80%" style='padding-top: 10px'>
+<img src="https://user-images.githubusercontent.com/115161827/205345339-112d4da7-fdfd-47f1-a5af-bea74f388119.png" width="80%" style='padding-top: 10px'>
 
 # Result
 ## Project dataset (before)
 
-<img src="https://user-images.githubusercontent.com/115161827/205345333-0b0a8c76-e369-406f-9955-46940f44e22a.png" width="80%" style='padding-top: 10px'>
+<img src="#" width="80%" style='padding-top: 10px'>
 
 ## Project dataset (after)
 
-<img src="https://user-images.githubusercontent.com/115161827/205345339-112d4da7-fdfd-47f1-a5af-bea74f388119.png" width="80%" style='padding-top: 10px'>
+<img src="#" width="80%" style='padding-top: 10px'>
 
 ## Project classes (before)
 
