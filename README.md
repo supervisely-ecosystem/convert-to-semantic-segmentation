@@ -34,7 +34,9 @@ You can convert object classes shapes using [convert-class-shape](https://ecosys
 
 App can be launched from ecosystem or images project
 
-## Run from Ecosystem
+<details>
+<summary open>Run from ecosystem</summary>
+<br>
 
 **Step 1.** Run the app from Ecosystem
 
@@ -44,7 +46,11 @@ App can be launched from ecosystem or images project
 
 <img src="https://user-images.githubusercontent.com/115161827/205343993-fa83a96f-aa43-4f40-a801-f6b343bf0950.gif" width="80%" style='padding-top: 10px'>
 
-## Run from Images Project or Dataset
+</details>
+
+<details>
+<summary>Run from Images Project or Dataset</summary>
+<br>
 
 **Step 1.** Run the application from the context menu of the Images Project
 
@@ -54,27 +60,10 @@ App can be launched from ecosystem or images project
 
 <img src="https://user-images.githubusercontent.com/115161827/205345339-112d4da7-fdfd-47f1-a5af-bea74f388119.png" width="80%" style='padding-top: 10px'>
 
+</details>
+
 # Result
-## Project dataset (before)
 
-<img src="#" width="80%" style='padding-top: 10px'>
-
-## Project dataset (after)
-
-<img src="#" width="80%" style='padding-top: 10px'>
-
-## Project classes (before)
-
-<img src="#cкриншот классов из исходного проекта" width="80%" style='padding-top: 10px'>
-
-## Project classes (after)
-
-<img src="#cкриншот классов из результирующего проекта(число классов <= исходному числу классов)" width="80%" style='padding-top: 10px'>
-
-## Project objects statistics (before)
-
-<img src="#cкриншот статистики по объектам из исходного проекта" width="80%" style='padding-top: 10px'>
-
-## Project objects statistics (after)
-
-<img src="#cкриншот статистики по объектам из результирующего проекта(число объектов < исходного числа объектов)" width="80%" style='padding-top: 10px'>
+Before(instance segmentation) |  After(semantic segmentation)
+:-------------------------:|:-----------------------------------:
+<img src="https://user-images.githubusercontent.com/115161827/205364201-9d7c781b-b464-488b-a4b5-2357290e7a67.png" style="max-height: 300px; width: auto;"/>  |  <img src="https://user-images.githubusercontent.com/115161827/205364209-b2ef0655-6b82-4157-b26a-338f3089e8e2.png" style="max-height: 300px; width: auto;"/>
