@@ -38,11 +38,11 @@ App can be launched from ecosystem or images project
 
 **Step 1.** Run the app from Ecosystem
 
-<img src="#action" width="80%" style='padding-top: 10px'>  
+<img src="https://user-images.githubusercontent.com/115161827/205343976-3a96f0c5-46f2-4277-bd9a-9e5c353bc951.png" width="80%" style='padding-top: 10px'>  
 
 **Step 2.** Select input project and press the Run button
 
-<img src="#action" width="80%" style='padding-top: 10px'>
+<img src="https://user-images.githubusercontent.com/115161827/205343993-fa83a96f-aa43-4f40-a801-f6b343bf0950.gif" width="80%" style='padding-top: 10px'>
 
 ## Run from Images Project or Dataset
 
@@ -57,11 +57,11 @@ App can be launched from ecosystem or images project
 # Result
 ## Project dataset (before)
 
-<img src="#cкриншот из тулбокса для исходного датасета, где много аннотаций разных типов и есть одинаковые объекты" width="80%" style='padding-top: 10px'>
+<img src="https://user-images.githubusercontent.com/115161827/205345333-0b0a8c76-e369-406f-9955-46940f44e22a.png" width="80%" style='padding-top: 10px'>
 
 ## Project dataset (after)
 
-<img src="#cкриншот из тулбокса для результирующего датасета, где объекты одного класса объеденены одной аннотацией bitmap" width="80%" style='padding-top: 10px'>
+<img src="https://user-images.githubusercontent.com/115161827/205345339-112d4da7-fdfd-47f1-a5af-bea74f388119.png" width="80%" style='padding-top: 10px'>
 
 ## Project classes (before)
 
