@@ -1,5 +1,5 @@
 <div align="center" markdown>
-<img src="#баннер приложения"/>  
+<img src="https://user-images.githubusercontent.com/115161827/205339220-4adc3b2a-356b-480b-87d2-ae8e646c8216.png"/>  
 
 # Instance segmentation to semantic segmentation
 
