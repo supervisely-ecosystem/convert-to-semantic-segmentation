@@ -4,9 +4,7 @@ import supervisely as sly
 from dotenv import load_dotenv
 from collections import defaultdict
 
-# init api for communicating with Supervisely Instance
-if sly.is_development():
-    load_dotenv("local.env")
+load_dotenv("local.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
 
 app = sly.Application()
@@ -32,24 +30,25 @@ dst_project = api.project.create(
 )
 
 # export all classes from initial project to new project with bitmap type
-objects_dict = {
-    obj_class.name: sly.ObjClass(obj_class.name, sly.Bitmap)
-    for obj_class in src_project_meta.obj_classes
-    if obj_class.geometry_type in (sly.Bitmap, sly.Polygon, sly.AnyGeometry)
-}
+objects_dict = {}
+for obj_class in src_project_meta.obj_classes:
+    if obj_class.geometry_type in (sly.Bitmap, sly.Polygon, sly.AnyGeometry):
+        objects_dict[obj_class.name] = sly.ObjClass(obj_class.name, sly.Bitmap)
 
 dst_project_meta = src_project_meta.clone(obj_classes=list(objects_dict.values()))
 api.project.update_meta(dst_project.id, dst_project_meta.to_json())
 api.project.update_custom_data(dst_project.id, {"src_project": src_project.id})
 
-for dataset in api.dataset.get_list(src_project.id):
-    ds_progress = sly.Progress(
-        f"Processing dataset: {src_project.name}/{dataset.name}",
-        total_cnt=dataset.images_count,
-    )
+
+src_project_datasets = api.dataset.get_list(src_project.id)
+for dataset in src_project_datasets:
     print(f"Dataset {dataset.name} has {dataset.items_count} images")
     images = api.image.get_list(dataset.id)
 
+    ds_progress = sly.Progress(
+        f"Processing dataset: {src_project.name}/{dataset.name}",
+        total_cnt=len(src_project_datasets),
+    )
     # create new dataset
     dst_dataset = api.dataset.create(dst_project.id, name=dataset.name)
     print(f"Dataset has been sucessfully created, id={dst_dataset.id}")
@@ -70,12 +69,9 @@ for dataset in api.dataset.get_list(src_project.id):
             mask_images = defaultdict(lambda: np.zeros(anno.img_size, bool))
             for index, label in enumerate(anno.labels, start=1):
                 current_class = label.obj_class.name
-                geometry_type = label.obj_class.geometry_type
+                geometry_type = label.geometry.geometry_name()
 
-                if geometry_type in (
-                    sly.Bitmap,
-                    sly.Polygon,
-                ):
+                if geometry_type in ("bitmap", "polygon"):
                     label.draw(mask_images[current_class], 1)
                 else:
                     continue
@@ -89,7 +85,7 @@ for dataset in api.dataset.get_list(src_project.id):
             new_anno = anno.clone(labels=new_labels)
             new_anns.append(new_anno)
 
-        ds_progress.iters_done_report(len(batch))
         api.annotation.upload_anns(new_img_ids, new_anns)
+    ds_progress.iters_done_report(1)
 
 app.shutdown()

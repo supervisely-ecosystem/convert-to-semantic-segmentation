@@ -8,7 +8,7 @@
   ],
   "description": "Convert polygon and bitmap labels to semantic segmentation",
   "version": "2.0.0",
-  "entrypoint": "python -m uvicorn src.main:app --host 0.0.0.0 --port 8000",
+  "entrypoint": "python main.py",
   "headless": true,
   "context_menu": {
     "context_category": "Transform",
