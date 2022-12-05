@@ -8,7 +8,7 @@
   ],
   "description": "Convert polygon and bitmap labels to semantic segmentation",
   "version": "2.0.0",
-  "entrypoint": "python main.py",
+  "entrypoint": "python src/main.py",
   "headless": true,
   "context_menu": {
     "context_category": "Transform",
