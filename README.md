@@ -1,5 +1,5 @@
 <div align="center" markdown>
-<img src="#баннер приложения"/>  
+<img src="https://user-images.githubusercontent.com/115161827/205339220-4adc3b2a-356b-480b-87d2-ae8e646c8216.png"/>  
 
 # Instance segmentation to semantic segmentation
 
@@ -12,15 +12,15 @@
 [![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/convert-to-semantic-segmentation)
 [![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervise.ly/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/convert-to-semantic-segmentation)
-<!-- [![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/convert-to-semantic-segmentation.png)](https://supervise.ly)
-[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/convert-to-semantic-segmentation.png)](https://supervise.ly) -->
+[![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/convert-to-semantic-segmentation.png)](https://supervise.ly)
+[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/convert-to-semantic-segmentation.png)](https://supervise.ly)
 
 </div>
 
 # Overview
 
-App convert all supported labels to one bitmap for each supported class.
-It may be helpful when you change you task from instance to semantic segmentation.
+App converts all supported labels to one bitmap for each supported class.
+It may be helpful when you change your task from instance to semantic segmentation.
 
 Supported classes: `Polygon`, `Bitmap` or `Any Shape` 
 
@@ -34,47 +34,36 @@ You can convert object classes shapes using [convert-class-shape](https://ecosys
 
 App can be launched from ecosystem or images project
 
-## Run from Ecosystem
+<details>
+<summary open>Run from ecosystem</summary>
+<br>
 
 **Step 1.** Run the app from Ecosystem
 
-<img src="#action" width="80%" style='padding-top: 10px'>  
+<img src="https://user-images.githubusercontent.com/115161827/205343976-3a96f0c5-46f2-4277-bd9a-9e5c353bc951.png" width="80%" style='padding-top: 10px'>  
 
 **Step 2.** Select input project and press the Run button
 
-<img src="#action" width="80%" style='padding-top: 10px'>
+<img src="https://user-images.githubusercontent.com/115161827/205343993-fa83a96f-aa43-4f40-a801-f6b343bf0950.gif" width="80%" style='padding-top: 10px'>
 
-## Run from Images Project or Dataset
+</details>
+
+<details>
+<summary>Run from Images Project or Dataset</summary>
+<br>
 
 **Step 1.** Run the application from the context menu of the Images Project
 
-<img src="#action" width="80%" style='padding-top: 10px'>  
+<img src="https://user-images.githubusercontent.com/115161827/205345333-0b0a8c76-e369-406f-9955-46940f44e22a.png" width="80%" style='padding-top: 10px'>  
 
 **Step 2.** Press the Run button
 
-<img src="#action" width="80%" style='padding-top: 10px'>
+<img src="https://user-images.githubusercontent.com/115161827/205345339-112d4da7-fdfd-47f1-a5af-bea74f388119.png" width="80%" style='padding-top: 10px'>
+
+</details>
 
 # Result
-## Project dataset (before)
 
-<img src="#cкриншот из тулбокса для исходного датасета, где много аннотаций разных типов и есть одинаковые объекты" width="80%" style='padding-top: 10px'>
-
-## Project dataset (after)
-
-<img src="#cкриншот из тулбокса для результирующего датасета, где объекты одного класса объеденены одной аннотацией bitmap" width="80%" style='padding-top: 10px'>
-
-## Project classes (before)
-
-<img src="#cкриншот классов из исходного проекта" width="80%" style='padding-top: 10px'>
-
-## Project classes (after)
-
-<img src="#cкриншот классов из результирующего проекта(число классов <= исходному числу классов)" width="80%" style='padding-top: 10px'>
-
-## Project objects statistics (before)
-
-<img src="#cкриншот статистики по объектам из исходного проекта" width="80%" style='padding-top: 10px'>
-
-## Project objects statistics (after)
-
-<img src="#cкриншот статистики по объектам из результирующего проекта(число объектов < исходного числа объектов)" width="80%" style='padding-top: 10px'>
+Before(instance segmentation) |  After(semantic segmentation)
+:-------------------------:|:-----------------------------------:
+<img src="https://user-images.githubusercontent.com/115161827/205364201-9d7c781b-b464-488b-a4b5-2357290e7a67.png" style="max-height: 300px; width: auto;"/>  |  <img src="https://user-images.githubusercontent.com/115161827/205364209-b2ef0655-6b82-4157-b26a-338f3089e8e2.png" style="max-height: 300px; width: auto;"/>
