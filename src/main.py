@@ -34,7 +34,7 @@ dst_project = api.project.create(
 objects_dict = {}
 for obj_class in src_project_meta.obj_classes:
     if obj_class.geometry_type in (sly.Bitmap, sly.Polygon, sly.AnyGeometry):
-        objects_dict[obj_class.name] = sly.ObjClass(obj_class.name, sly.Bitmap)
+        objects_dict[obj_class.name] = sly.ObjClass(obj_class.name, sly.Bitmap, color=obj_class.color)
 
 dst_project_meta = src_project_meta.clone(obj_classes=list(objects_dict.values()))
 api.project.update_meta(dst_project.id, dst_project_meta.to_json())
