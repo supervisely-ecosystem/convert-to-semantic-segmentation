@@ -53,8 +53,8 @@ for dataset in src_project_datasets:
     dst_dataset = api.dataset.create(dst_project.id, name=dataset.name)
     print(f"Dataset has been sucessfully created, id={dst_dataset.id}")
 
-    new_anns = []
     for batch in sly.batched(images):
+        new_anns = []
         img_names, image_ids, img_metas = zip(*((x.name, x.id, x.meta) for x in batch))
         annotations = api.annotation.download_json_batch(dataset.id, image_ids)
 
