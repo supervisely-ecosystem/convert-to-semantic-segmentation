@@ -46,7 +46,7 @@ for dataset in src_project_datasets:
     images = api.image.get_list(dataset.id)
 
     ds_progress = sly.Progress(
-        f"Processing dataset: {src_project.name}/{dataset.name}",
+        f"Processing dataset: {dataset.name}",
         total_cnt=len(src_project_datasets),
     )
     # create new dataset
