@@ -3,6 +3,7 @@ import numpy as np
 import supervisely as sly
 from dotenv import load_dotenv
 from collections import defaultdict
+from tqdm import tqdm
 
 load_dotenv("local.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
@@ -45,16 +46,13 @@ for dataset in src_project_datasets:
     print(f"Dataset {dataset.name} has {dataset.items_count} images")
     images = api.image.get_list(dataset.id)
 
-    ds_progress = sly.Progress(
-        f"Processing dataset: {dataset.name}",
-        total_cnt=len(src_project_datasets),
-    )
+    ds_progress = tqdm(total=len(images), desc=f"Processing dataset: {dataset.name}")
     # create new dataset
     dst_dataset = api.dataset.create(dst_project.id, name=dataset.name)
     print(f"Dataset has been sucessfully created, id={dst_dataset.id}")
 
-    new_anns = []
     for batch in sly.batched(images):
+        new_anns = []
         img_names, image_ids, img_metas = zip(*((x.name, x.id, x.meta) for x in batch))
         annotations = api.annotation.download_json_batch(dataset.id, image_ids)
 
@@ -86,6 +84,6 @@ for dataset in src_project_datasets:
             new_anns.append(new_anno)
 
         api.annotation.upload_anns(new_img_ids, new_anns)
-    ds_progress.iters_done_report(1)
+        ds_progress.update(len(batch))
 
 app.shutdown()
