@@ -7,6 +7,7 @@
     "data operations"
   ],
   "description": "Convert polygon and bitmap labels to semantic segmentation",
+  "docker_image": "supervisely/base-py-sdk:6.72.55",
   "version": "2.0.0",
   "entrypoint": "python src/main.py",
   "headless": true,
