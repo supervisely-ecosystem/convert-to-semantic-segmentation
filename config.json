@@ -1,21 +1,23 @@
 {
-  "name": "Convert to semantic segmentation",
-  "type": "app",
-  "categories": [
-    "images",
-    "annotation transformation",
-    "data operations"
-  ],
-  "description": "Convert polygon and bitmap labels to semantic segmentation",
-  "docker_image": "supervisely/base-py-sdk:6.72.55",
-  "version": "2.0.0",
-  "entrypoint": "python src/main.py",
-  "headless": true,
-  "context_menu": {
-    "context_category": "Transform",
-    "target": ["images_project"]
-  },
-   "icon": "https://user-images.githubusercontent.com/115161827/205370076-4953799f-3ce6-4e51-9b98-f15a12f51801.jpg",
-  "icon_cover": true,
-  "poster": "https://user-images.githubusercontent.com/115161827/205339220-4adc3b2a-356b-480b-87d2-ae8e646c8216.png"  
+    "name": "Convert to semantic segmentation",
+    "type": "app",
+    "categories": [
+        "images",
+        "annotation transformation",
+        "data operations"
+    ],
+    "description": "Convert polygon and bitmap labels to semantic segmentation",
+    "docker_image": "supervisely/data-operations:0.0.1",
+    "version": "2.0.0",
+    "entrypoint": "python src/main.py",
+    "headless": true,
+    "context_menu": {
+        "context_category": "Transform",
+        "target": [
+            "images_project"
+        ]
+    },
+    "icon": "https://user-images.githubusercontent.com/115161827/205370076-4953799f-3ce6-4e51-9b98-f15a12f51801.jpg",
+    "icon_cover": true,
+    "poster": "https://user-images.githubusercontent.com/115161827/205339220-4adc3b2a-356b-480b-87d2-ae8e646c8216.png"
 }
