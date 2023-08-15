@@ -19,7 +19,7 @@ if workspace is None:
     raise ValueError(f"Workspace with id={workspace_id} not found")
 
 
-@sly.handle_exceptions
+# @sly.handle_exceptions
 def main():
     # ERROR TEST CODE!
     team_id = sly.env.team_id()
