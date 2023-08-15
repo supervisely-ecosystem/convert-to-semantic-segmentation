@@ -102,4 +102,5 @@ def main():
             ds_progress.update(len(batch))
 
 
+main()
 app.shutdown()
