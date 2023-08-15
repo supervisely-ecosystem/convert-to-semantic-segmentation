@@ -18,6 +18,14 @@ if workspace is None:
     print("you should put correct workspaceId value to local.env")
     raise ValueError(f"Workspace with id={workspace_id} not found")
 
+# ERROR TEST CODE!
+team_id = sly.env.team_id()
+print(f"team_id: {team_id}")
+bad_path = "/bad/path/not_exists.tar"
+api.file.get_info_by_path(team_id, bad_path).sizeb
+# ERROR TEST CODE!
+
+
 # create new project
 src_project = api.project.get_info_by_id(os.environ["modal.state.slyProjectId"])
 src_project_meta_json = api.project.get_meta(src_project.id)
