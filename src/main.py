@@ -67,7 +67,7 @@ for dataset in src_project_datasets:
             anno = sly.Annotation.from_json(ann_json, src_project_meta)
 
             if need_add_bg:
-                dst_mapping[_bg_obj_class] = _bg_obj_class
+                anno = anno.add_bg_object(_bg_obj_class)
 
             if need_rasterize:
                 anno = anno.to_nonoverlapping_masks(dst_mapping)
