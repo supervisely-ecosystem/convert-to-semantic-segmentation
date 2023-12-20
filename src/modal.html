@@ -1,16 +1,22 @@
 <div>
   <sly-field title="Options:">
     <div class="fflex mt5 mb5">
-      <el-checkbox v-model="state.needRasterize">
+      <el-checkbox
+        v-model="state.needRasterize"
+        @change="e => !event.target.checked ? state.addBackgroundMask = false : null"
+      >
         <i class="zmdi zmdi-roller" style="color: #009aff; margin: 0 5px"></i>
         Rasterize objects on images
-        </el-checkbox>
+      </el-checkbox>
     </div>
     <div class="fflex mt5 mb5">
-      <el-checkbox v-model="state.addBackgroundMask">
+      <el-checkbox
+        v-model="state.addBackgroundMask"
+        :disabled="!state.needRasterize"
+      >
         <i class="zmdi zmdi-image" style="color: #009aff; margin: 0 5px"></i>
         Add background mask (class <code>__bg__</code>)
-        </el-checkbox>
+      </el-checkbox>
     </div>
   </sly-field>
 </div>
