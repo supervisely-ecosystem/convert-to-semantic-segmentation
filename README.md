@@ -35,8 +35,8 @@ You can convert object classes shapes using [convert-class-shape](https://ecosys
 
 **v1.0.13** - added new options you can find in the modal window:
 
-- `Rasterize objects on images` - if you want to rasterize objects on images, you can enable this option. Each pixel of the image will be assigned only to one class (object order matters). If you disable this option, objects can be overlapped by other objects. This option is enabled by default.
-- `Add background (__bg__ class)` - if enabled, background class `__bg__` will be added to the project. All unlabeled pixels will be assigned to this class. The background class color will be black ([0,0,0]). This option is available only if `Rasterize objects on images` is enabled (background class will be rasterized on images too).
+- `Rasterize objects on images` - if enabled objects will be rasterized on images – each pixel of the image will be assigned only to one class (the order of objects matters). If disabled objects can overlap with other objects.
+- `Add background (__bg__ class)` - if enabled, background class `__bg__` will be added to the project. All unlabeled pixels will be assigned to this class. The background class color will be black. This option is available only if `Rasterize objects on images` is enabled (background will be rasterized on images too).
 
 # How to use
 
