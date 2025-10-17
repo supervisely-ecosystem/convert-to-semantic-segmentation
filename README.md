@@ -9,7 +9,7 @@
   <a href="#Result">Result</a>
 </p>
 
-[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](../../../../supervisely-ecosystem/convert-to-semantic-segmentation)
+[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervisely.com/apps/convert-to-semantic-segmentation)
 [![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervisely.com/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/convert-to-semantic-segmentation)
 [![views](https://app.supervisely.com/img/badges/views/supervisely-ecosystem/convert-to-semantic-segmentation.png)](https://supervisely.com)
@@ -29,7 +29,7 @@ Supported labels: `Polygon`, `Bitmap`
 
 All other shapes will be ignored, and will not be presented in the resulting project.
 
-You can convert object classes shapes using [convert-class-shape](../../../../supervisely-ecosystem/convert-class-shape) application.
+You can convert object classes shapes using [convert-class-shape](https://ecosystem.supervisely.com/apps/convert-class-shape) application.
 
 ## Updates:
 
