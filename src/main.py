@@ -5,10 +5,41 @@ from dotenv import load_dotenv
 from tqdm import tqdm
 
 import supervisely as sly
+from supervisely.annotation.annotation import AnnotationJsonFields
+from supervisely.annotation.label import LabelJsonFields
+from supervisely.api.module_api import ApiField
 
 if sly.is_development():
     load_dotenv("local.env")
     load_dotenv(os.path.expanduser("~/supervisely.env"))
+
+
+SUPPORTED_LABEL_GEOMETRIES = {sly.Bitmap.geometry_name(), sly.Polygon.geometry_name()}
+
+
+def download_supported_annotation_json_batch(api: sly.Api, dataset_id: int, image_ids):
+    # Avoid SDK-side coordinate conversion for unsupported AnyShape labels.
+    results = api.post(
+        "annotations.bulk.info",
+        data={
+            ApiField.DATASET_ID: dataset_id,
+            ApiField.IMAGE_IDS: image_ids,
+            ApiField.FORCE_METADATA_FOR_LINKS: True,
+            ApiField.INTEGER_COORDS: True,
+        },
+    ).json()
+
+    anns_by_image_id = {}
+    for result in results:
+        ann_json = result[ApiField.ANNOTATION]
+        ann_json[AnnotationJsonFields.LABELS] = [
+            label
+            for label in ann_json.get(AnnotationJsonFields.LABELS, [])
+            if label.get(LabelJsonFields.GEOMETRY_TYPE) in SUPPORTED_LABEL_GEOMETRIES
+        ]
+        anns_by_image_id[result[ApiField.IMAGE_ID]] = ann_json
+
+    return [anns_by_image_id[image_id] for image_id in image_ids]
 
 
 @sly.handle_exceptions
@@ -60,7 +91,7 @@ def main():
         for batch in sly.batched(images):
             new_anns = []
             img_names, image_ids, img_metas = zip(*((x.name, x.id, x.meta) for x in batch))
-            annotations = api.annotation.download_json_batch(dataset.id, image_ids)
+            annotations = download_supported_annotation_json_batch(api, dataset.id, image_ids)
 
             new_img_infos = api.image.upload_ids(
                 dst_dataset.id, img_names, image_ids, metas=img_metas
